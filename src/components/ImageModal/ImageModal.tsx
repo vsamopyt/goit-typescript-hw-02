@@ -62,8 +62,6 @@ const modalStyles = {
     border: 'none',
     borderRadius: '10px',
     overflow: 'hidden',
-    // overflow: "scroll"
-    // z-index: "10"
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
