@@ -48,10 +48,10 @@ const ImageModal = ({
 
 const modalStyles = {
   content: {
-    maxWidth:"1000px",
+    maxWidth:"900px",
     height: "auto",
     // height:"auto",
-    top: '55%',
+    top: '54%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
