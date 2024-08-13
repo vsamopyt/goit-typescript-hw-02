@@ -1,5 +1,13 @@
+
 import css from './ImageCard.module.css';
-export default function ImageCard({ item, onImageClick }) {
+import {IResultItem} from "../../types";
+
+interface IImageCardProps {
+  item: IResultItem;
+  onImageClick: (urls: string, alt_description: string, likes: number, user:string)=>void;
+}
+
+export default function ImageCard({ item, onImageClick }:IImageCardProps) {
   const { urls, alt_description, likes, user } = item;
   return (
     <div className={css.imageCardWraper}>
@@ -9,8 +17,6 @@ export default function ImageCard({ item, onImageClick }) {
         alt={alt_description}
         data-likes={likes}
         data-name={user.name}
-        target="_blank"
-        rel="noreferrer noopener"
         onClick={() =>
           onImageClick(urls.regular, alt_description, likes, user.name)
         }

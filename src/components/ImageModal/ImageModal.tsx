@@ -1,6 +1,15 @@
 import ReactModal from 'react-modal';
 import css from './ImageModal.module.css';
 
+interface IImageModalProps {
+  isOpen: boolean;
+  onRequestClose: ()=>void;
+  imageUrl: string;
+  alt: string;
+  likes: number;
+  userName: string,
+}
+
 const ImageModal = ({
   isOpen,
   onRequestClose,
@@ -8,7 +17,7 @@ const ImageModal = ({
   alt,
   likes,
   userName,
-}) => (
+}: IImageModalProps) => (
   <ReactModal
     isOpen={isOpen}
     onRequestClose={onRequestClose}
@@ -21,7 +30,7 @@ const ImageModal = ({
     </button>
     <h3>{alt}</h3>
     {/* <CloseButton onClick={onRequestClose}>&times;</CloseButton> */}
-    <img src={imageUrl} alt="Selected" style={{ width: '100%' }} />
+    <img src={imageUrl} alt="Selected" style={{ width: '100%', aspectRatio: "16/10"}} />
     <div className={css.imageModalDesc}>
       <div>
         {' '}
@@ -39,9 +48,10 @@ const ImageModal = ({
 
 const modalStyles = {
   content: {
-    maxWidth:"800px",
-    height:"auto",
-    top: '50%',
+    maxWidth:"700px",
+    height: "auto",
+    // height:"auto",
+    top: '55%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
@@ -52,6 +62,8 @@ const modalStyles = {
     border: 'none',
     borderRadius: '10px',
     overflow: 'hidden',
+    // overflow: "scroll"
+    // z-index: "10"
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',

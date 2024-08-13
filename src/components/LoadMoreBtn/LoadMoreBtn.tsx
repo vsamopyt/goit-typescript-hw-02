@@ -1,5 +1,9 @@
 import css from "./LoadMoreBtn.module.css"
-export default function LoadMoreBtn ({onHandle}) {
+interface ILoadMoreBtnProps {
+    onHandle: ()=> void;
+}
+
+export default function LoadMoreBtn ({onHandle}:ILoadMoreBtnProps) {
     return (
         <div className={css.loadMoreBtnSection}>
 

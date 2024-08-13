@@ -4,21 +4,21 @@ import SearchBar from '../SearchBar/SearchBar';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import BarLoader from 'react-spinners/BarLoader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { fetchImagesByTopic } from '../../images-api';
+import {fetchImagesByTopic} from "../../images-api"
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import toast, { Toaster } from 'react-hot-toast';
 import ImageModal from '../ImageModal/ImageModal';
+import {IResultItem} from "../../types"
 
 function App() {
-  const [listImages, setlistImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [topic, setTopic] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [schowBtn, setSchowBtn] = useState(false);
+  const [listImages, setlistImages] = useState<IResultItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [topic, setTopic] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [schowBtn, setSchowBtn] = useState<boolean>(false);
 
-
-  const handleTopic = async newTopic => {
+  const handleTopic = async (newTopic:string): Promise<void> => {
     if (topic === newTopic) {
       toast.error(
         'You set the same search request. If you want to see more pictures on your request, click the button "Load more" or set new search request.',
@@ -32,21 +32,20 @@ function App() {
     setSchowBtn(false);
   };
 
-
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setCurrentPage(currentPage + 1);
   };
 
 
   //  modal
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
-  const [selectedAlt, setSelectedAlt] = useState('');
-  const [selectedImgLikes, setSelectedImgLikes] = useState('');
-  const [selectedUserName, setSelectedUserName] = useState('');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string>('');
+  const [selectedAlt, setSelectedAlt] = useState<string>('');
+  const [selectedImgLikes, setSelectedImgLikes] = useState<number>(0);
+  const [selectedUserName, setSelectedUserName] = useState<string>('');
 
 
-  const openModal = (image, alt, likes, userName) => {
+  const openModal = (image:string, alt: string, likes:number, userName: string): void => {
     setSelectedImage(image);
     setIsOpen(true);
     setSelectedAlt(alt);
@@ -54,15 +53,13 @@ function App() {
     setSelectedUserName(userName);
   };
 
-
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsOpen(false);
     setSelectedImage('');
     setSelectedAlt('');
-    setSelectedImgLikes('');
+    setSelectedImgLikes(0);
     setSelectedUserName('');
   };
-
 
   useEffect(() => {
     if (topic === '') {
@@ -84,8 +81,12 @@ function App() {
           });
         }
 
-        setlistImages(previousData => {
-          return [...previousData, ...data];
+        // setlistImages(previousData => {
+        //   return [...previousData, ...data];
+        // });
+
+          setlistImages(listImages => {
+          return [...listImages, ...data];
         });
 
       } catch (error) {
@@ -131,3 +132,4 @@ function App() {
 }
 
 export default App;
+
